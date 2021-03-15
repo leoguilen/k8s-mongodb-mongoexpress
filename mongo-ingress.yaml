@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: mongo-ingress
+spec:
+  tls:
+    - hosts:
+        - mongoexpress.com
+      secretName: k8s-ingress-tls
+  rules:
+    - host: mongoexpress.com
+      http:
+        paths:
+          - backend:
+              serviceName: mongo-express-service
+              servicePort: 8081
